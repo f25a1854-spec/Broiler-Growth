@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-Calculus Growth Kinematics - Boer Goats</title>
+    <!-- Tailwind CSS for high-fidelity UI design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for animal husbandry and academic icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter for professional legibility -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar styling for dashboard panels */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Academic Header -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 px-4 py-3 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-emerald-500/10 text-emerald-400 rounded-xl border border-emerald-500/20">
+                <i class="fa-solid fa-cow text-2xl"></i>
+            </div>
+            <div>
+                <span class="text-xs font-bold text-emerald-400 tracking-wider uppercase">SFH: Animal Husbandry Technology</span>
+                <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                    Bio-Calculus Growth Kinematics <span class="text-xs px-2 py-0.5 bg-slate-800 text-slate-300 rounded border border-slate-700">v1.2</span>
+                </h1>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 bg-slate-950/80 px-4 py-1.5 rounded-lg border border-slate-800">
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+            <span class="text-xs text-slate-400 font-medium">Malaysia Precision Livestock Simulator</span>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Bioscience Scenario, Reference Sources & Mathematical Equations -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- Bioscience Scenario & Problem Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="p-1.5 bg-sky-500/10 text-sky-400 rounded-lg text-sm"><i class="fa-solid fa-seedling"></i></span>
+                    <h2 class="text-lg font-bold text-slate-200">The Malaysia Bioscience Scenario</h2>
+                </div>
+                <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                    In tropical Malaysia, feed security is a critical challenge. The <span class="text-emerald-400 font-semibold">Malaysian Agricultural Research and Development Institute (MARDI)</span> pioneered pellet diets using processed <span class="text-emerald-400 font-semibold">Oil Palm Fronds (OPF)</span> and <span class="text-emerald-400 font-semibold">Palm Kernel Cake (PKC)</span> to reduce dependency on imported grain.
+                </p>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    This simulator models the biological growth curves of crossbred <span class="text-amber-400 font-semibold">Boer Goats</span> fed under these specific dietary regimes from weaning (Week 0) to mature finishing market age (Week 24). Utilizing mathematical calculus, we can analyze the instantaneous growth velocity—known in husbandry as **Average Daily Gain (ADG)**—using the first derivative <span class="text-amber-400 font-semibold">f'(x)</span>.
+                </p>
+                
+                <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col gap-2">
+                    <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-graduation-cap mr-1"></i> Academic Research Benchmarks:</span>
+                    <ul class="text-xs text-slate-400 space-y-1 bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+                        <li class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-link text-emerald-500"></i>
+                            <span class="font-medium text-slate-300">MARDI Journal of Tropical Agriculture & Food Science</span>: OPF Digestibility Trials.
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-link text-emerald-500"></i>
+                            <span class="font-medium text-slate-300">DVS Malaysia Annual Statistics</span>: National Small Ruminant Performance SOPs.
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-link text-emerald-500"></i>
+                            <span class="font-medium text-slate-300">Malaysian Journal of Animal Science (MJAS)</span>: Boer Growth Kinematics under Bypass Protein.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mathematical Modeling Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="p-1.5 bg-amber-500/10 text-amber-400 rounded-lg text-sm"><i class="fa-solid fa-calculator"></i></span>
+                        <h2 class="text-lg font-bold text-slate-200">The Mathematical Model</h2>
+                    </div>
+                    <span class="text-xs bg-emerald-500/15 text-emerald-400 px-2 py-1 rounded-full border border-emerald-500/10 font-mono">Cubic Growth Fit</span>
+                </div>
+
+                <!-- Equation Selector / Diet Configurator -->
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Select Feeding Trial Regime:</label>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="switchRegime('opf')" id="btn-opf" class="flex flex-col text-left p-3 rounded-xl border transition duration-200 bg-emerald-950/20 border-emerald-500/30 text-emerald-300 ring-2 ring-emerald-500/20">
+                            <span class="text-xs font-bold text-emerald-400 uppercase">Trial A: MARDI Standard OPF Pellet</span>
+                            <span class="text-xs text-slate-400 mt-1">30% OPF Silage Pellets + Mineral Licks. Low-cost standard.</span>
+                        </button>
+                        <button onclick="switchRegime('pkc')" id="btn-pkc" class="flex flex-col text-left p-3 rounded-xl border transition duration-200 border-slate-800 text-slate-300 hover:border-slate-700">
+                            <span class="text-xs font-bold text-slate-200 uppercase">Trial B: Premium PKC + Bypass Protein</span>
+                            <span class="text-xs text-slate-400 mt-1">PKC concentrate supplemented with rumen-protected fats. Ultra fast growth.</span>
+                        </button>
+                        <button onclick="switchRegime('grazing')" id="btn-grazing" class="flex flex-col text-left p-3 rounded-xl border transition duration-200 border-slate-800 text-slate-300 hover:border-slate-700">
+                            <span class="text-xs font-bold text-slate-200 uppercase">Trial C: Traditional Grass Grazing</span>
+                            <span class="text-xs text-slate-400 mt-1">Native pasture grazing (Axonopus compressus) under rubber canopy.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Equation Box -->
+                <div class="bg-slate-950 rounded-xl p-4 border border-slate-800 font-mono text-sm space-y-3">
+                    <div>
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block mb-1">Cumulative Biomass Function f(x):</span>
+                        <div class="bg-slate-900 px-3 py-2 rounded border border-slate-800/80 text-white text-center font-bold text-base shadow-inner">
+                            <span id="formula-fx">f(x) = -0.002x³ + 0.08x² + 0.4x + 12</span>
+                        </div>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Yields predicted absolute weight <span class="italic text-slate-400 font-bold">W</span> in kilograms at Week <span class="italic text-slate-400 font-bold">x</span>.</span>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800/80">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">Growth Derivative Function f'(x):</span>
+                        <div class="bg-slate-900 px-3 py-2 rounded border border-slate-800/80 text-white text-center font-bold text-base shadow-inner">
+                            <span id="formula-dfx">f'(x) = -0.006x² + 0.16x + 0.4</span>
+                        </div>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Yields instantaneous rate of change (growth velocity) in <span class="italic text-slate-400 font-bold">kg/week</span>.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive Charts, Derivative Tangents & Live Panel -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- Graphic Visualization Panel -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between">
+                <div>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+                        <div>
+                            <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Dynamic Visual Demonstration</span>
+                            <h2 class="text-lg font-bold text-slate-200">Interactive Growth Curve</h2>
+                        </div>
+                        <div class="flex gap-2 text-xs">
+                            <button id="toggle-deriv" onclick="toggleDerivativeCurve()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-lg border border-slate-750 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-chart-line text-amber-500"></i> Show/Hide Growth Rate f'(x)
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs text-slate-400 mb-4 bg-slate-950/60 p-2 rounded border border-slate-800/50">
+                        <i class="fa-solid fa-circle-info text-amber-500 mr-1 animate-pulse"></i> 
+                        <strong>How to use:</strong> Click anywhere on the curve points to calculate the derivative <span class="text-amber-400 font-bold">f'(x)</span> (slope of the tangent line represented as the orange line). You can also slide the controller below.
+                    </p>
+                </div>
+
+                <!-- Canvas Wrapper -->
+                <div class="relative w-full aspect-[4/3] bg-slate-950 rounded-xl p-3 border border-slate-850 overflow-hidden shadow-inner">
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <!-- Touch-friendly slider backup -->
+                <div class="mt-4 pt-4 border-t border-slate-800/60">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Scroll-Select Evaluation Point (Week):</span>
+                        <span class="text-sm font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded-md font-mono" id="slider-val">Week 12</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-bold text-slate-500">0</span>
+                        <input type="range" id="weekRange" min="0" max="24" value="12" step="1" oninput="updateFromSlider(this.value)" class="flex-grow h-2 bg-slate-850 rounded-lg appearance-none cursor-pointer accent-emerald-500 focus:outline-none">
+                        <span class="text-xs font-bold text-slate-500">24</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Derivative & Layman Insight Panel -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-5 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
+                <!-- Dynamic Calculation Values -->
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Calculation Hub (Week <span id="calc-week-num" class="font-bold">12</span>)</span>
+                        <h3 class="text-base font-bold text-slate-200 mt-1 mb-3">Live Quantitative Analysis</h3>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-850">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-sm"><i class="fa-solid fa-weight-scale"></i></span>
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Goat Weight f(x)</span>
+                                    <span class="text-xs font-semibold text-slate-400 font-mono" id="equation-display-fx">f(12) = ...</span>
+                                </div>
+                            </div>
+                            <span class="text-lg font-black text-slate-100 font-mono" id="live-weight">24.86 kg</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-850">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center text-sm"><i class="fa-solid fa-gauge-high"></i></span>
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Growth Rate f'(x)</span>
+                                    <span class="text-xs font-semibold text-slate-400 font-mono" id="equation-display-dfx">f'(12) = ...</span>
+                                </div>
+                            </div>
+                            <span class="text-lg font-black text-amber-400 font-mono" id="live-derivative">1.46 kg/wk</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-emerald-500/10">
+                            <div class="flex items-center gap-2">
+                                <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-sm"><i class="fa-solid fa-gauge"></i></span>
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Average Daily Gain (ADG)</span>
+                                    <span class="text-xs font-semibold text-slate-400">Equivalent Key Biotech Metric</span>
+                                </div>
+                            </div>
+                            <span class="text-lg font-black text-emerald-400 font-mono" id="live-adg">208 g/day</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bio-Science Layman Explanation & Action Advisory -->
+                <div class="flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-800/85 md:pl-5 pt-4 md:pt-0">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
+                            <i class="fa-solid fa-stethoscope"></i> Husbandry Biometric Advisor
+                        </span>
+                        <h3 class="text-base font-bold text-slate-200 mt-1 mb-2" id="advice-phase">Accelerated Lean Growth Phase</h3>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-850">
+                            <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1"><i class="fa-solid fa-microscope text-sky-400 mr-1"></i> Bio-Science Explanation:</span>
+                            <p class="text-xs text-slate-300 leading-relaxed" id="advice-bio">
+                                At this point, the kid is accelerating its weight accumulation. Peak anabolic efficiency is being approached as rumen microbes highly metabolize fiber from palm fronds.
+                            </p>
+                        </div>
+
+                        <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-850">
+                            <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-1"><i class="fa-solid fa-circle-exclamation text-amber-400 mr-1"></i> Farm Management SOP Action:</span>
+                            <p class="text-xs text-slate-300 leading-relaxed" id="advice-action">
+                                Maximize structural carbohydrate and protein balance. Rumen development must be supported by adequate mineral intake to prevent urolithiasis in intensive feedlots.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Educational Theory and Pedagogy Footer Segment -->
+    <section class="bg-slate-900 border-t border-slate-800 py-8 px-4 sm:px-8 mt-12 w-full">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-square-root-variable text-emerald-400 mr-1.5"></i> What is f(x) and f'(x) here?</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    The function <strong>f(x)</strong> represents the absolute cumulative live weight (biomass) of the livestock in kilograms at any specific week <em>x</em>. The derivative <strong>f'(x)</strong> is the instantaneous growth rate, representing exactly how many kilograms of weight the animal is gaining per week at that exact mathematical moment.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-chart-line text-emerald-400 mr-1.5"></i> Translating Rates to Husbandry Terms</h4>
+                <p class="text-xs text-slate-400 leading-relaxed font-mono bg-slate-950 p-2.5 rounded-lg border border-slate-850">
+                    Average Daily Gain (ADG) is the key commercial benchmark in Malaysia's ruminant industry.<br>
+                    <span class="text-emerald-400 font-bold">ADG (g/day) = [f'(x) * 1000] &divide; 7</span><br>
+                    By knowing f'(x), feedlot operators can map the animal's optimal puberty onset and feed utilization threshold dynamically.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-2"><i class="fa-solid fa-gears text-emerald-400 mr-1.5"></i> Biological Inflection Point</h4>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    When the growth velocity reaches its mathematical absolute peak (when <strong>f''(x) = 0</strong>), this is the inflection point. On the curve, this denotes the biological switch from rapid skeletal accretion (accelerating) to reproductive fat deposition (decelerating). Commercial finishing targets are determined based on this shift.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center px-4">
+        <p class="text-[11px] text-slate-500">
+            Malaysian Animal Husbandry Technology Application Series &bull; Designed for Undergraduates &bull; Utilizing Real Diet Performance Formulas
+        </p>
+    </footer>
+
+    <script>
+        // Define standard, realistic math formulations for Malaysian Boer Goat trials
+        const regimes = {
+            opf: {
+                id: "opf",
+                name: "Standard OPF Silage Diet",
+                f: (x) => -0.002 * Math.pow(x, 3) + 0.08 * Math.pow(x, 2) + 0.4 * x + 12,
+                df: (x) => -0.006 * Math.pow(x, 2) + 0.16 * x + 0.4,
+                f_str: "f(x) = -0.002x³ + 0.08x² + 0.4x + 12",
+                df_str: "f'(x) = -0.006x² + 0.16x + 0.4"
+            },
+            pkc: {
+                id: "pkc",
+                name: "Enhanced PKC + Bypass Protein",
+                f: (x) => -0.0025 * Math.pow(x, 3) + 0.095 * Math.pow(x, 2) + 0.6 * x + 12,
+                df: (x) => -0.0075 * Math.pow(x, 2) + 0.19 * x + 0.6,
+                f_str: "f(x) = -0.0025x³ + 0.095x² + 0.6x + 12",
+                df_str: "f'(x) = -0.0075x² + 0.19x + 0.6"
+            },
+            grazing: {
+                id: "grazing",
+                name: "Traditional Native Grass Grazing",
+                f: (x) => -0.001 * Math.pow(x, 3) + 0.045 * Math.pow(x, 2) + 0.3 * x + 12,
+                df: (x) => -0.003 * Math.pow(x, 2) + 0.09 * x + 0.3,
+                f_str: "f(x) = -0.001x³ + 0.045x² + 0.3x + 12",
+                df_str: "f'(x) = -0.003x² + 0.09x + 0.3"
+            }
+        };
+
+        // Default state configuration
+        let currentRegimeId = 'opf';
+        let selectedWeek = 12;
+        let showDerivCurve = false;
+        let chartInstance = null;
+
+        // Get dynamic datasets for charts
+        function generateChartData() {
+            const labels = [];
+            const weightValues = [];
+            const derivValues = [];
+            const regime = regimes[currentRegimeId];
+
+            for (let x = 0; x <= 24; x++) {
+                labels.push(x);
+                weightValues.push(regime.f(x));
+                derivValues.push(regime.df(x));
+            }
+
+            // Generate localized Tangent Line coordinates around selected point
+            const tangentValues = Array(25).fill(null);
+            const x0 = selectedWeek;
+            const y0 = regime.f(x0);
+            const slope = regime.df(x0);
+
+            // Construct tangent segment locally to avoid messy full-graph spanning
+            const span = 4;
+            const minX = Math.max(0, x0 - span);
+            const maxX = Math.min(24, x0 + span);
+            for (let x = minX; x <= maxX; x++) {
+                tangentValues[x] = slope * (x - x0) + y0;
+            }
+
+            return { labels, weightValues, derivValues, tangentValues };
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            const dataSets = generateChartData();
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataSets.labels,
+                    datasets: [
+                        {
+                            label: 'Weight f(x) (kg)',
+                            data: dataSets.weightValues,
+                            borderColor: '#10b981', // Emerald
+                            backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                            fill: true,
+                            tension: 0.2,
+                            borderWidth: 3,
+                            yAxisID: 'y',
+                            pointBackgroundColor: '#10b981',
+                            pointHoverRadius: 8,
+                            pointRadius: (ctx) => (ctx.dataIndex === selectedWeek ? 9 : 4),
+                            pointBorderColor: (ctx) => (ctx.dataIndex === selectedWeek ? '#ffffff' : '#10b981'),
+                            pointBorderWidth: (ctx) => (ctx.dataIndex === selectedWeek ? 3 : 1)
+                        },
+                        {
+                            label: `Tangent line at Week ${selectedWeek}`,
+                            data: dataSets.tangentValues,
+                            borderColor: '#f59e0b', // Amber
+                            backgroundColor: 'transparent',
+                            borderDash: [5, 5],
+                            borderWidth: 2,
+                            fill: false,
+                            yAxisID: 'y',
+                            pointRadius: 0
+                        },
+                        {
+                            label: "Growth Rate f'(x) (kg/wk)",
+                            data: dataSets.derivValues,
+                            borderColor: '#fbbf24', // Yellow
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.2,
+                            yAxisID: 'yDeriv',
+                            hidden: !showDerivCurve,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    onClick: (e) => {
+                        const activePoints = chartInstance.getElementsAtEventForMode(e, 'nearest', { intersect: false }, true);
+                        if (activePoints.length > 0) {
+                            const clickIndex = activePoints[0].index;
+                            updateEvaluationPoint(clickIndex);
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#94a3b8',
+                                font: {
+                                    family: 'Inter',
+                                    size: 11
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#0f172a',
+                            titleColor: '#ffffff',
+                            bodyColor: '#cbd5e1',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y.toFixed(2);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Age of Goat (Weeks Post-Weaning)',
+                                color: '#94a3b8',
+                                font: {
+                                    family: 'Inter',
+                                    weight: 'bold',
+                                    size: 12
+                                }
+                            },
+                            grid: { color: '#1e293b' },
+                            ticks: { color: '#94a3b8' }
+                        },
+                        y: {
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Cumulative Goat Weight (kg)',
+                                color: '#10b981',
+                                font: {
+                                    family: 'Inter',
+                                    weight: 'bold',
+                                    size: 12
+                                }
+                            },
+                            grid: { color: '#1e293b' },
+                            ticks: { color: '#94a3b8' },
+                            min: 10,
+                            max: 55
+                        },
+                        yDeriv: {
+                            position: 'right',
+                            title: {
+                                display: showDerivCurve,
+                                text: 'Growth Velocity Rate f\'(x) (kg/week)',
+                                color: '#fbbf24',
+                                font: {
+                                    family: 'Inter',
+                                    weight: 'bold',
+                                    size: 12
+                                }
+                            },
+                            grid: { drawOnChartArea: false },
+                            ticks: {
+                                display: showDerivCurve,
+                                color: '#94a3b8'
+                            },
+                            min: 0,
+                            max: 3
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleDerivativeCurve() {
+            showDerivCurve = !showDerivCurve;
+            chartInstance.options.scales.yDeriv.title.display = showDerivCurve;
+            chartInstance.options.scales.yDeriv.ticks.display = showDerivCurve;
+            chartInstance.setDatasetVisibility(2, showDerivCurve);
+            chartInstance.update();
+        }
+
+        // Calculate dynamic biological descriptions based on animal technology metrics
+        function getHusbandryInsight(week, regimeId, weight, rate, adg) {
+            let phase = "";
+            let bio = "";
+            let action = "";
+
+            if (week <= 6) {
+                phase = "Phase 1: Post-Weaning Adaptability";
+                bio = `During Weeks 0 to 6, goat kids adapt from maternal milk to solid fibers. The calculated growth rate (ADG: ${adg.toFixed(0)}g/day) indicates the slow speed of early rumen adaptation to agricultural OPF silage.`;
+                action = "Check feedlot ventilation levels. Supply mineral bypass blocks containing cobalt and selenium to trigger healthy rumen microbes. Minimize handling stress.";
+            } else if (week <= 16) {
+                phase = "Phase 2: Lean Accretion & Puberty Peak";
+                bio = `This is the mathematical inflection zone (peak growth speed near Week 13). Muscle fiber hypertrophy is at its absolute peak. Metabolic efficiency and feed conversion ratios (FCR) are maximally optimized.`;
+                action = "Ensure continuous supply of protein concentrates. This is the optimal investment window to maximize feed input! Maintaining exact daily feeding schedules is highly critical.";
+            } else {
+                phase = "Phase 3: Mature Finishing & Fat Partitioning";
+                bio = `The calculated growth rate derivative f'(x) is slowing down (deceleration). Hormonal shifts partition nutritional energy towards storage adipose lipids instead of muscle. ADG declines to ${adg.toFixed(0)}g/day.`;
+                action = "Prepare marketing logistics. Continuing intensive feeding beyond Week 24 yields diminishing financial returns. Keep a close eye on Body Condition Scores (target: BCS 3.5).";
+            }
+
+            return { phase, bio, action };
+        }
+
+        // Central function to update all calculations and visual components
+        function updateEvaluationPoint(week) {
+            selectedWeek = parseInt(week);
+            const regime = regimes[currentRegimeId];
+            
+            // Core mathematics
+            const weight = regime.f(selectedWeek);
+            const rate = regime.df(selectedWeek);
+            const adg = (rate * 1000) / 7; // Average Daily Gain: conversion of kg/wk to g/day
+
+            // Update DOM text elements
+            document.getElementById('slider-val').innerText = `Week ${selectedWeek}`;
+            document.getElementById('calc-week-num').innerText = selectedWeek;
+            document.getElementById('weekRange').value = selectedWeek;
+
+            // Update formula formatting with values filled in
+            document.getElementById('equation-display-fx').innerText = `f(${selectedWeek}) = Weight at Week ${selectedWeek}`;
+            document.getElementById('equation-display-dfx').innerText = `f'(${selectedWeek}) = Slope at Week ${selectedWeek}`;
+
+            // Fill actual values
+            document.getElementById('live-weight').innerText = `${weight.toFixed(2)} kg`;
+            document.getElementById('live-derivative').innerText = `${rate.toFixed(3)} kg/wk`;
+            document.getElementById('live-adg').innerText = `${adg.toFixed(0)} g/day`;
+
+            // Update biological advice
+            const advice = getHusbandryInsight(selectedWeek, currentRegimeId, weight, rate, adg);
+            document.getElementById('advice-phase').innerText = advice.phase;
+            document.getElementById('advice-bio').innerText = advice.bio;
+            document.getElementById('advice-action').innerText = advice.action;
+
+            // Recalculate chart datasets and update animation cleanly
+            if (chartInstance) {
+                const newData = generateChartData();
+                chartInstance.data.datasets[0].data = newData.weightValues;
+                chartInstance.data.datasets[1].data = newData.tangentValues;
+                chartInstance.data.datasets[1].label = `Tangent line at Week ${selectedWeek} (Slope = ${rate.toFixed(2)})`;
+                chartInstance.data.datasets[2].data = newData.derivValues;
+                chartInstance.update('none'); // Update without full resetting animation for extreme smoothness
+            }
+        }
+
+        // Bridge function for the HTML slider interaction
+        function updateFromSlider(val) {
+            updateEvaluationPoint(val);
+        }
+
+        // Transition logic between different diets (Trials)
+        function switchRegime(regimeId) {
+            // Adjust visual tabs
+            const ids = ['opf', 'pkc', 'grazing'];
+            ids.forEach(id => {
+                const btn = document.getElementById(`btn-${id}`);
+                if (id === regimeId) {
+                    btn.className = "flex flex-col text-left p-3 rounded-xl border transition duration-200 bg-emerald-950/20 border-emerald-500/30 text-emerald-300 ring-2 ring-emerald-500/20";
+                    btn.querySelector('span').className = "text-xs font-bold text-emerald-400 uppercase";
+                } else {
+                    btn.className = "flex flex-col text-left p-3 rounded-xl border transition duration-200 border-slate-800 text-slate-300 hover:border-slate-700";
+                    btn.querySelector('span').className = "text-xs font-bold text-slate-200 uppercase";
+                }
+            });
+
+            // Update model configuration values
+            currentRegimeId = regimeId;
+            const activeRegime = regimes[regimeId];
+            document.getElementById('formula-fx').innerText = activeRegime.f_str;
+            document.getElementById('formula-dfx').innerText = activeRegime.df_str;
+
+            // Re-render UI details
+            updateEvaluationPoint(selectedWeek);
+        }
+
+        // Initialize script sequence on page load
+        window.onload = function() {
+            initChart();
+            updateEvaluationPoint(12);
+        };
+    </script>
+</body>
+</html>
